@@ -6,6 +6,7 @@ import business.customer.mapper.CustomerMapper;
 import business.customer.model.Customer;
 import persistence.customer.customerDAO;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -31,6 +32,16 @@ public class CustomerService {
     public CustomerDTO getCustomerById(int id) {
         Customer customer = dao.getCustomerById(id);
         return (customer != null) ? CustomerMapper.toDTO(customer) : null;
+    }
+
+
+    public List<CustomerDTO> getAllCustomers() {
+        List<Customer> customerModels = dao.findAll(); // now works
+        List<CustomerDTO> customerDTOs = new ArrayList<>();
+        for (Customer model : customerModels) {
+            customerDTOs.add(CustomerMapper.toDTO(model));
+        }
+        return customerDTOs;
     }
 
     public List<Map<String, Object>> getCustomerHistory(int customerId) {

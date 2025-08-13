@@ -72,7 +72,7 @@
     %>
 </table>
 <script>function editBook(bookId) {
-    window.location.href = 'editbook?bookId=' + bookId;
+    window.location.href = 'editBook?bookId=' + bookId;
 }</script>
 </body>
 </html>

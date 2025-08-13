@@ -6,6 +6,7 @@ import persistence.util.DBConnection;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -188,4 +189,31 @@ public class customerDAO {
             } catch (Exception e) { e.printStackTrace(); }
             return null;
         }
+    public List<Customer> findAll() {
+        String sql = "SELECT customer_id, account_number, name, address, phone_number, email " +
+                "FROM customers ORDER BY customer_id";
+        List<Customer> list = new ArrayList<>();
+
+        try (Connection con = DBConnection.getConnection();
+             PreparedStatement ps = con.prepareStatement(sql);
+             ResultSet rs = ps.executeQuery()) {
+
+            while (rs.next()) {
+                Customer c = new Customer(
+                        rs.getInt("customer_id"),
+                        rs.getString("account_number"),
+                        rs.getString("name"),
+                        rs.getString("address"),
+                        rs.getString("phone_number"),
+                        rs.getString("email")
+                );
+
+                list.add(c);
+            }
+        } catch (SQLException e) {
+            // Don’t return null; fail loudly in logs and return empty list
+            throw new RuntimeException("Failed to fetch customers", e);
+        }
+        return list;
+    }
     }

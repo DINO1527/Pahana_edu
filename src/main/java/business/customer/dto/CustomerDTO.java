@@ -20,7 +20,14 @@ public class CustomerDTO {
             this.email = email;
         }
 
-        // Getters and Setters
+    public CustomerDTO(String accountNumber, String name, String address, String phone, String email) {
+        this.accountNumber = accountNumber;
+        this.name = name;
+        this.address = address;
+        this.phone = phone;
+        this.email = email;}
+
+    // Getters and Setters
         public String getAccountNumber() {
 
             return accountNumber;

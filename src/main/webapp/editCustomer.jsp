@@ -55,7 +55,7 @@
                     <!-- ***** Logo End ***** -->
                     <!-- ***** Menu Start ***** -->
                     <ul class="nav">
-                        <li><a href="#">❌</a></li>
+                        <span class="close-btn" onclick="closePopup()">&times;</span>
                     </ul>
                     <a class='menu-trigger'>
                         <span>Menu</span>
@@ -75,7 +75,7 @@
                 <div class="col-lg-12">
 
                     <!-- Close Button (Top Right) -->
-                    <span class="close-btn" onclick="closePopup()">&times;</span>
+
 
 
                     <h2>Customer Details</h2>
@@ -262,7 +262,7 @@
     }
     function closePopup() {
         // example: redirect, hide div, etc.
-        window.location.href = "somepage.jsp"; // or customize popup behavior
+        window.location.href = "manageCustomer"; // or customize popup behavior
     }
 
 

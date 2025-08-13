@@ -18,14 +18,10 @@ public class AddCustomerServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String customerIdStr = request.getParameter("customerId");
-        int customerId = 0;
 
-            customerId = Integer.parseInt(customerIdStr);
 
 
         CustomerDTO dto = new CustomerDTO(
-                customerId,
                 request.getParameter("accountNumber"),
                 request.getParameter("name"),
                 request.getParameter("address"),
