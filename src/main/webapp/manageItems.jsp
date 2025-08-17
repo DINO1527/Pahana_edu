@@ -20,59 +20,194 @@
 <%
     List<BookDTO> books = (List<BookDTO>) request.getAttribute("books");
 %>
+<!DOCTYPE html>
+<html lang="en">
 
-<html>
 <head>
-    <title>Title</title>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <title>Manage Items</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+
+    <!-- Additional CSS Files -->
+    <link rel="stylesheet" href="assets/css/fontawesome.css">
+    <link rel="stylesheet" href="assets/css/templatemo-lugx-gaming.css">
+    <link rel="stylesheet" href="assets/css/owl.css">
+    <link rel="stylesheet" href="assets/css/animate.css">
+    <link rel="stylesheet"href="https://unpkg.com/swiper@7/swiper-bundle.min.css"/>
+    <!--
+
+    TemplateMo 589 lugx gaming
+
+    https://templatemo.com/tm-589-lugx-gaming
+
+    -->
 </head>
+
 <body>
-<h2>Book Inventory</h2>
-<form method="get" action="bookInventory" class="search-bar">
-    <input type="text" name="search"
-           placeholder="Search by ID or Name"
-           value="<%= request.getParameter("search") != null ? request.getParameter("search") : "" %>">
-    <button type="submit">Search</button>
-</form>
-
-<table>
-    <tr>
-        <th>Book ID</th>
-        <th>Image</th>
-        <th>Book Name</th>
-        <th>Stock</th>
-        <th>Sold Count</th>
-        <th> </th>
-    </tr>
-    <%
-        if (books != null) {
-            for (BookDTO book : books) {
-                String base64Image = book.getBookImage() != null
-                        ? java.util.Base64.getEncoder().encodeToString(book.getBookImage())
-                        : null;
-    %>
-    <tr>
-        <td><%= book.getBookId() %></td>
-        <td>
-            <% if (base64Image != null) { %>
-            <img src="data:image/jpeg;base64,<%= base64Image %>" width="60" height="80"/>
-            <% } else { %>
-            No Image
-            <% } %>
-        </td>
-        <td><%= book.getBookName() %></td>
-        <td><%= book.getStock() %></td>
-        <td><%= book.getSoldCount() %></td>
-       <td> <button onclick="editBook(<%= book.getBookId() %>)">
-           <i class="fa fa-edit"></i>
-       </button></td>
-
-    </tr>
-    <%      }
+<style>
+    table {
+        border-collapse: collapse;
+        width: 100%;
+        margin-top: 10px;
     }
-    %>
-</table>
+
+    th, td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        vertical-align: top;
+    }
+
+    th {
+        background: #f5f5f5;
+        text-align: left;
+    }
+
+    .actions a {
+        display: inline-block;
+        padding: 4px 10px;
+        border-radius: 4px;
+        text-decoration: none;
+    }
+
+    .btn-edit {
+        background: #1976d2;
+        color: #fff;
+    }
+</style>
+<!-- ***** Preloader Start ***** -->
+<div id="js-preloader" class="js-preloader">
+    <div class="preloader-inner">
+        <span class="dot"></span>
+        <div class="dots">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </div>
+</div>
+<!-- ***** Preloader End ***** -->
+
+<!-- ***** Header Area Start ***** -->
+<header class="header-area header-sticky">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <nav class="main-nav">
+                    <!-- ***** Logo Start ***** -->
+                    <a href="index.html" class="logo">
+                        <img src="assets/images/logo.jpg" alt="" style="width: 158px;">
+                    </a>
+                    <!-- ***** Logo End ***** -->
+                    <!-- ***** Menu Start ***** -->
+                    <ul class="nav">
+                        <li><a href="index.html" class="active">Home</a></li>
+                        <li><a href="shop.html">Our Shop</a></li>
+                        <li><a href="product-details.html">Product Details</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                        <li><a href="#">Sign In</a></li>
+                    </ul>
+                    <a class='menu-trigger'>
+                        <span>Menu</span>
+                    </a>
+                    <!-- ***** Menu End ***** -->
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+<!-- ***** Header Area End ***** -->
+
+<div class="main-banner"  with="100%" height="50%">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 align-self-center">
+                <div class="caption header-text">
+                    <h6>Welcome to lugx</h6>
+                    <div class="search-input">
+                        <form method="get" action="bookInventory" class="search-bar">
+                            <input type="text" name="search"
+                                   placeholder="Search by ID or Name"
+                                   value="<%= request.getParameter("search") != null ? request.getParameter("search") : "" %>">
+                            <button type="submit">Search</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="features">
+    <div class="container">
+        <div class="row">
+            <div>
+                <div class="item">
+                        <table>
+                            <tr>
+                                <th>Book ID</th>
+                                <th>Image</th>
+                                <th>Book Name</th>
+                                <th>Stock</th>
+                                <th>Sold Count</th>
+                            </tr>
+                            <%
+                                if (books != null) {
+                                    for (BookDTO book : books) {
+                                        String base64Image = book.getBookImage() != null
+                                                ? java.util.Base64.getEncoder().encodeToString(book.getBookImage())
+                                                : null;
+                            %>
+                            <tr onclick="editBook(<%= book.getBookId() %>)" style="cursor:pointer;">                            <td><%= book.getBookId() %></td>
+                                <td>
+                                    <% if (base64Image != null) { %>
+                                    <img src="data:image/jpeg;base64,<%= base64Image %>" width="60" height="80"/>
+                                    <% } else { %>
+                                    No Image
+                                    <% } %>
+                                </td>
+                                <td><%= book.getBookName() %></td>
+                                <td><%= book.getStock() %></td>
+                                <td><%= book.getSoldCount() %></td>
+
+
+                            </tr>
+                            <%      }
+                            }
+                            %>
+                        </table>
+
+                    </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer>
+    <div class="container">
+        <div class="col-lg-12">
+            <p>Copyright © 2048 LUGX Gaming Company. All rights reserved. &nbsp;&nbsp; <a rel="nofollow" href="https://templatemo.com" target="_blank">Design: TemplateMo</a></p>
+        </div>
+    </div>
+</footer>
+
+<!-- Scripts -->
 <script>function editBook(bookId) {
     window.location.href = 'editBook?bookId=' + bookId;
 }</script>
+<!-- Bootstrap core JavaScript -->
+<script src="vendor/jquery/jquery.min.js"></script>
+<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+<script src="assets/js/isotope.min.js"></script>
+<script src="assets/js/owl-carousel.js"></script>
+<script src="assets/js/counter.js"></script>
+<script src="assets/js/custom.js"></script>
+
 </body>
 </html>

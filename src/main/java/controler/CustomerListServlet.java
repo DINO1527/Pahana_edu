@@ -20,10 +20,19 @@ public class CustomerListServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
 
-        List<CustomerDTO> customers = customerService.getAllCustomers();
-        req.setAttribute("customers", customers);
+        String keyword = req.getParameter("searchKeyword");
+        List<CustomerDTO> customers;
 
+        if (keyword != null && !keyword.trim().isEmpty()) {
+            customers = customerService.searchCustomers(keyword);
+        } else {
+            customers = customerService.getAllCustomers();
+        }
+
+        req.setAttribute("customers", customers);
+        req.setAttribute("searchKeyword", keyword); // keep search text
         req.getRequestDispatcher("/manageCustomer.jsp").forward(req, resp);
     }
+
 
 }

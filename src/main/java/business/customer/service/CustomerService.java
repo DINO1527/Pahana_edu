@@ -44,6 +44,16 @@ public class CustomerService {
         return customerDTOs;
     }
 
+    public List<CustomerDTO> searchCustomers(String keyword) {
+        List<Customer> customerModels = dao.findByKeyword(keyword);
+        List<CustomerDTO> customerDTOs = new ArrayList<>();
+        for (Customer model : customerModels) {
+            customerDTOs.add(CustomerMapper.toDTO(model));
+        }
+        return customerDTOs;
+    }
+
+
     public List<Map<String, Object>> getCustomerHistory(int customerId) {
         return dao.getCustomerHistory(customerId);
     }

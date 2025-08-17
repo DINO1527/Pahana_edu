@@ -216,4 +216,41 @@ public class customerDAO {
         }
         return list;
     }
+
+    public List<Customer> findByKeyword(String keyword) {
+        String sql = "SELECT customer_id, account_number, name, address, phone_number, email " +
+                "FROM customers " +
+                "WHERE customer_id LIKE ? OR account_number LIKE ? OR name LIKE ? " +
+                "ORDER BY customer_id";
+
+        List<Customer> list = new ArrayList<>();
+
+        try (Connection con = DBConnection.getConnection();
+             PreparedStatement ps = con.prepareStatement(sql)) {
+
+            String likePattern = "%" + keyword + "%";
+            ps.setString(1, likePattern);
+            ps.setString(2, likePattern);
+            ps.setString(3, likePattern);
+
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    Customer c = new Customer(
+                            rs.getInt("customer_id"),
+                            rs.getString("account_number"),
+                            rs.getString("name"),
+                            rs.getString("address"),
+                            rs.getString("phone_number"),
+                            rs.getString("email")
+                    );
+                    list.add(c);
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Failed to search customers", e);
+        }
+
+        return list;
     }
+
+}

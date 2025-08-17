@@ -57,7 +57,7 @@ public class EditBookServlet extends HttpServlet {
             }
 
             if (service.updateBook(dto)) {
-                response.sendRedirect("manageCustomer");
+                response.sendRedirect("bookInventory");
             } else {
                 response.sendRedirect("error.jsp");
             }
