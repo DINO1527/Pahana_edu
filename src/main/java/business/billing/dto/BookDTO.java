@@ -5,6 +5,7 @@ public class BookDTO {
     private int bookId;
     private String bookName;
     private double price;
+    private int stockQty;
 
     // Getters & Setters
     public int getBookId() {
@@ -26,5 +27,13 @@ public class BookDTO {
     }
     public void setPrice(double price) {
         this.price = price;
+    }
+
+    public int getStockQty() {
+        return stockQty;
+    }
+
+    public void setStockQty(int stockQty) {
+        this.stockQty = stockQty;
     }
 }

@@ -11,6 +11,7 @@ public class BookMapper {
         dto.setBookId(book.getBookId());
         dto.setBookName(book.getBookName());
         dto.setPrice(book.getPrice());
+        dto.setStockQty(book.getStockQty());
         return dto;
     }
 

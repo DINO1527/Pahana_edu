@@ -19,7 +19,6 @@ public class BookDTO {
                    int stock, int soldCount) {
         this.bookId = bookId;
         this.bookName = bookName;
-
         this.price = price;
         this.stock = stock;
         this.soldCount = soldCount;

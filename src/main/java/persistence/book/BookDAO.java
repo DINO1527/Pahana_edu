@@ -70,23 +70,6 @@ public class BookDAO {
         }
     }
 
-    public byte[] getBookImageById(int bookId) {
-        String sql = "SELECT image FROM books WHERE book_id = ?";
-        try (Connection conn = DBConnection.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
-
-            stmt.setInt(1, bookId);
-            try (ResultSet rs = stmt.executeQuery()) {
-                if (rs.next()) {
-                    Blob imageBlob = rs.getBlob("image");
-                    return imageBlob != null ? imageBlob.getBytes(1, (int) imageBlob.length()) : null;
-                }
-            }
-        } catch (SQLException e) {
-            e.printStackTrace(); // Consider logging this properly
-        }
-        return null;
-    }
 
     public BookDTO getBookById(int bookId) throws SQLException {
         String sql = "SELECT book_id, book_name, price, stock, book_image FROM books WHERE book_id = ?";
@@ -109,13 +92,14 @@ public class BookDAO {
     }
 
     public boolean updateBook(Book book) throws SQLException {
-        String sql = "UPDATE books SET price=?, stock=?, book_image=? WHERE book_id=?";
+        String sql = "UPDATE books SET book_name=?, price=?, stock=?, book_image=? WHERE book_id=?";
         try (Connection con = DBConnection.getConnection();
              PreparedStatement stmt = con.prepareStatement(sql)) {
-            stmt.setBigDecimal(1, book.getPrice());
-            stmt.setInt(2, book.getStock());
-            stmt.setBytes(3, book.getBookImage());
-            stmt.setInt(4, book.getBookId());
+            stmt.setString(1,book.getBookName());
+            stmt.setBigDecimal(2, book.getPrice());
+            stmt.setInt(3, book.getStock());
+            stmt.setBytes(4, book.getBookImage());
+            stmt.setInt(5, book.getBookId());
             return stmt.executeUpdate() > 0;
         }
     }

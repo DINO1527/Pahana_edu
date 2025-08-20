@@ -12,9 +12,6 @@ import java.util.List;
 
 public class BookService {
     private final BookDAO dao = new BookDAO();
-    public byte[] getBookImageById(int bookId) {
-        return dao.getBookImageById(bookId);
-    }
 
     public List<BookDTO> getBooks(String search) throws SQLException {
         return dao.getBooks(search);

@@ -1,91 +1,108 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Dino_E
-  Date: 21/07/2025
-  Time: 20:57
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
+
 <head>
-    <meta charset="UTF-8">
-    <title>Pahana Edu - Login</title>
-    <link rel="stylesheet" type="text/css" href="css/styles.css">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <title>Lugx Gaming Template - Contact Page</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+
+    <!-- Additional CSS Files -->
+    <link rel="stylesheet" href="assets/css/fontawesome.css">
+    <link rel="stylesheet" href="assets/css/templatemo-lugx-gaming.css">
+    <link rel="stylesheet" href="assets/css/owl.css">
+    <link rel="stylesheet" href="assets/css/animate.css">
+    <link rel="stylesheet"href="https://unpkg.com/swiper@7/swiper-bundle.min.css"/>
     <style>
-        body {
-            font-family: 'Segoe UI', sans-serif;
-            background: #f9f9f9;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
-        .login-box {
-            background-color: #fff;
-            padding: 30px 40px;
-            border-radius: 10px;
-            box-shadow: 0 0 15px rgba(0,0,0,0.1);
-            width: 350px;
-        }
-        .login-box h2 {
-            text-align: center;
-            margin-bottom: 25px;
-            color: #333;
-        }
-        .input-group {
-            margin-bottom: 20px;
-        }
-        .input-group label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: 600;
-        }
-        .input-group input {
-            width: 100%;
-            padding: 10px;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-        }
-        .login-btn {
-            width: 100%;
-            padding: 10px;
-            background-color: #2196F3;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-        .login-btn:hover {
-            background-color: #0d8bf2;
-        }
-        .error {
-            color: red;
-            font-size: 14px;
-            text-align: center;
-        }
+        .error { color: red; font-size: 12px; }
+        .input-error { border: 1px solid red; }
     </style>
+    <title>Ad New Customer</title>
 </head>
 <body>
-<div class="login-box">
-    <h2>Login</h2>
-    <form action="LoginServlet" method="post">
-        <div class="input-group">
-            <label for="username">Username:</label>
-            <input type="text" id="username" name="username" required />
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<!-- ***** Preloader Start ***** -->
+<div id="js-preloader" class="js-preloader">
+    <div class="preloader-inner">
+        <span class="dot"></span>
+        <div class="dots">
+            <span></span>
+            <span></span>
+            <span></span>
         </div>
-        <div class="input-group">
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password" required />
-        </div>
-        <button type="submit" class="login-btn">Login</button>
-    </form>
-    <%
-        String error = request.getParameter("error");
-        if (error != null && error.equals("invalid")) {
-    %>
-    <p class="error">Invalid username or password.</p>
-    <% } %>
+    </div>
 </div>
+<!-- ***** Preloader End ***** -->
+
+<div class="contact-page section bgm">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 align-self-left">
+                <div class="left-text">
+                    <div class="section-heading">
+                        <h6>Welcome to Pahana Edu Book Shop</h6>
+                        <h2>Inventory Customer Management System</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="right-content">
+                    <div class="row">
+
+                        <div class="col-lg-12 d-flex justify-content-left">
+
+                            <form action="login" method="post" class="w-50">
+                                <div class="mb-3 text-center"><h4 style="color: #fc7e38">LOGIN</h4></div>
+                                <div class="mb-3">
+                                    <div class="input-container">
+                                        <input type="text" name="username"
+                                               class="form-control <%= request.getAttribute("error") != null ? "input-error" : "" %>"
+                                               required placeholder=" " />
+                                        <label>User Name</label>
+                                    </div>
+                                </div>
+
+                                <div class="mb-3">
+                                    <div class="input-container">
+                                        <input type="password" name="password"
+                                               class="form-control <%= request.getAttribute("error") != null ? "input-error" : "" %>"
+                                               required placeholder=" " />
+                                        <label>Password</label>
+                                    </div>
+                                </div>
+
+                                <% if (request.getAttribute("error") != null) { %>
+                                <div class="text-danger mb-3"><%= request.getAttribute("error") %></div>
+                                <% } %>
+
+                                <div class="text-center">
+                                    <button type="submit" class="btn btn-primary px-4">Login</button>
+                                </div>
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Bootstrap core JavaScript -->
+<script src="vendor/jquery/jquery.min.js"></script>
+<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+<script src="assets/js/isotope.min.js"></script>
+<script src="assets/js/owl-carousel.js"></script>
+<script src="assets/js/counter.js"></script>
+<script src="assets/js/custom.js"></script>
+
 </body>
 </html>

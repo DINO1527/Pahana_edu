@@ -5,47 +5,50 @@ import java.math.BigDecimal;
 public class Book {
 
 
-        private int bookId;
-        private String bookName;
-                private BigDecimal price;
-        private byte[] bookImage;
-        private int stock;
+    private int bookId;
+    private String bookName;
+    private BigDecimal price;
+    private byte[] bookImage;
+    private int stock;
 
-        public int getBookId() {
-                return bookId;
-        }
-        public void setBookId(int bookId) {
-                this.bookId = bookId;
-        }
+    public int getBookId() {
+        return bookId;
+    }
 
-        public String getBookName() {
-                return bookName;
-        }
-        public void setBookName(String bookName) {
-                this.bookName = bookName;
-        }
+    public void setBookId(int bookId) {
+        this.bookId = bookId;
+    }
 
-        public BigDecimal getPrice() {
-                return price;
-        }
-        public void setPrice(BigDecimal price) {
-                this.price = price;
-        }
+    public String getBookName() {
+        return bookName;
+    }
 
-        public byte[] getBookImage() {
-                return bookImage;
-        }
+    public void setBookName(String bookName) {
+        this.bookName = bookName;
+    }
 
-        public void setBookImage(byte[] bookImage) {
-                this.bookImage = bookImage;
-        }
+    public BigDecimal getPrice() {
+        return price;
+    }
 
-        public int getStock() {
-                return stock;
-        }
+    public void setPrice(BigDecimal price) {
+        this.price = price;
+    }
 
-        public void setStock(int stock) {
-                this.stock = stock;
-        }
+    public byte[] getBookImage() {
+        return bookImage;
+    }
+
+    public void setBookImage(byte[] bookImage) {
+        this.bookImage = bookImage;
+    }
+
+    public int getStock() {
+        return stock;
+    }
+
+    public void setStock(int stock) {
+        this.stock = stock;
+    }
 }
 

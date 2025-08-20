@@ -6,6 +6,7 @@ public class Book {
     private int bookId;
     private String bookName;
     private double price;
+    private int stockQty;
 
     public double getPrice() {
         return price;
@@ -29,6 +30,14 @@ public class Book {
 
     public void setBookId(int bookId) {
         this.bookId = bookId;
+    }
+
+    public int getStockQty() {
+        return stockQty;
+    }
+
+    public void setStockQty(int stockQty) {
+        this.stockQty = stockQty;
     }
 
     // Getters & Setters

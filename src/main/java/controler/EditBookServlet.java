@@ -3,6 +3,7 @@ package controler;
 import business.book.dto.BookDTO;
 import business.book.service.BookService;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
@@ -57,9 +58,12 @@ public class EditBookServlet extends HttpServlet {
             }
 
             if (service.updateBook(dto)) {
-                response.sendRedirect("bookInventory");
+                request.setAttribute("success", "Book saved successfully!");
+                RequestDispatcher rd = request.getRequestDispatcher("addBook.jsp");
+                rd.forward(request, response);
             } else {
-                response.sendRedirect("error.jsp");
+                request.setAttribute("error", "Failed to save book. Please try again.");
+                RequestDispatcher rd = request.getRequestDispatcher("addBook.jsp");
             }
         } catch (Exception e) {
             throw new ServletException(e);
