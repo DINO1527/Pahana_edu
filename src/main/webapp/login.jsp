@@ -1,4 +1,9 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%
+    response.setHeader("Cache-Control","no-cache, no-store, must-revalidate"); // HTTP 1.1
+    response.setHeader("Pragma","no-cache"); // HTTP 1.0
+    response.setDateHeader ("Expires", 0); // Proxies
+%>
 <html>
 
 <head>
@@ -28,6 +33,28 @@
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
+<% if (request.getAttribute("error") != null) { %>
+<script>
+    Swal.fire({
+        icon: 'error',
+        title: 'Login Failed',
+        text: '<%= request.getAttribute("error") %>',
+        confirmButtonText: 'Try Again'
+    }).then(() => {
+        // clear inputs after alert
+        document.querySelector("input[name='username']").value = "";
+        document.querySelector("input[name='password']").value = "";
+    });
+</script>
+<% } %>
+
+<script type="text/javascript">
+    history.pushState(null, null, location.href);
+    window.onpopstate = function () {
+        history.go(1); // Prevent back
+        window.onload();
+    };
+</script>
 <!-- ***** Preloader Start ***** -->
 <div id="js-preloader" class="js-preloader">
     <div class="preloader-inner">
@@ -40,12 +67,7 @@
     </div>
 </div>
 <!-- ***** Preloader End ***** -->
-<script type="text/javascript">
-    history.pushState(null, null, location.href);
-    window.onpopstate = function () {
-        history.go(1); // Prevent back
-    };
-</script>
+
 <div class="contact-page section bgm">
     <div class="container">
         <div class="row">
@@ -65,7 +87,7 @@
                                 <div class="mb-3 text-center"><h4 style="color: #fc7e38">LOGIN</h4></div>
                                 <div class="mb-3">
                                     <div class="input-container">
-                                        <input type="text" name="username"
+                                        <input type="text" name="username" autocomplete="off"
                                                class="form-control <%= request.getAttribute("error") != null ? "input-error" : "" %>"
                                                required placeholder=" " />
                                         <label>User Name</label>
@@ -74,19 +96,17 @@
 
                                 <div class="mb-3">
                                     <div class="input-container">
-                                        <input type="password" name="password"
+                                        <input type="password" name="password" autocomplete="off"
                                                class="form-control <%= request.getAttribute("error") != null ? "input-error" : "" %>"
                                                required placeholder=" " />
                                         <label>Password</label>
                                     </div>
                                 </div>
 
-                                <% if (request.getAttribute("error") != null) { %>
-                                <div class="text-danger mb-3"><%= request.getAttribute("error") %></div>
-                                <% } %>
+
 
                                 <div class="text-center">
-                                    <button type="submit" class="btn btn-primary px-4">Login</button>
+                                    <button type="submit" class="btn btn-primary px-4" autocomplete="off">Login</button>
                                 </div>
                             </form>
                         </div>
@@ -97,7 +117,12 @@
         </div>
     </div>
 </div>
-
+<script>
+    window.onload = function() {
+        document.querySelector("input[name='username']").value = "";
+        document.querySelector("input[name='password']").value = "";
+    };
+</script>
 
 <!-- Bootstrap core JavaScript -->
 <script src="vendor/jquery/jquery.min.js"></script>
