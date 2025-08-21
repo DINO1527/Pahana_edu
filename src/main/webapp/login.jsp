@@ -55,9 +55,7 @@
             <div class="col-lg-6">
                 <div class="right-content">
                     <div class="row">
-
                         <div class="col-lg-12 d-flex justify-content-left">
-
                             <form action="login" method="post" class="w-50">
                                 <div class="mb-3 text-center"><h4 style="color: #fc7e38">LOGIN</h4></div>
                                 <div class="mb-3">

@@ -13,8 +13,18 @@ import java.util.Map;
 public class CustomerService {
     private final customerDAO dao = new customerDAO();
 
+
     public boolean addCustomer(CustomerDTO dto) {
         if (dao.isAccountNumberExists(dto.getAccountNumber()) || dao.isPhoneNumberExists(dto.getPhone())) {
+            return false;
+        }
+        if (
+                dto.getAccountNumber() == null || !dto.getAccountNumber().matches("\\d{5}") ||
+                        dto.getName() == null || dto.getName().trim().isEmpty() ||
+                        dto.getAddress() == null || dto.getAddress().trim().isEmpty() ||
+                        dto.getPhone() == null || !dto.getPhone().matches("\\d{10}") ||
+                        dto.getEmail() == null || !dto.getEmail().matches("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$")
+        ) {
             return false;
         }
         Customer customer = CustomerMapper.toModel(dto);
@@ -55,15 +65,9 @@ public class CustomerService {
 
 
     public List<Map<String, Object>> getCustomerHistory(int customerId) {
+
         return dao.getCustomerHistory(customerId);
     }
 
-    public boolean isAccountExists(String accountNumber) {
-        return dao.isAccountNumberExists(accountNumber);
-    }
-
-    public boolean isPhoneExists(String phone) {
-        return dao.isPhoneNumberExists(phone);
-    }
 }
 
