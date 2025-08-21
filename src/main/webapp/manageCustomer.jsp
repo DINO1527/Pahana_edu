@@ -63,7 +63,7 @@ th {
     <div class="container">
         <div class="row">
             <div class="col-lg-6 align-self-center">
-                <div class="caption header-text"><h6>Welcome to lugx</h6>
+                <div class="caption header-text"><h6>Customer Management</h6>
                     <div class="search-input">
                         <form id="search" action="manageCustomer" method="get">
                             <input type="text"
@@ -71,6 +71,9 @@ th {
                                    id='searchText'
                                    name="searchKeyword"/>
                             <button role="button" type="submit">Search Now</button>
+                            <button  style="right: -250px;"  type="button" onclick="window.location.href='addCustomer.jsp'">
+                                Add New Customer
+                            </button>
                         </form>
                     </div>
                 </div>

@@ -5,7 +5,16 @@
   Time: 20:58
   To change this template use File | Settings | File Templates.
 --%>
-
+<%
+    HttpSession session1 = request.getSession(false);
+    if (session1 == null || session1.getAttribute("userId") == null) {
+        if (session1 != null) {
+            session1.invalidate();
+        }
+        response.sendRedirect("login.jsp?error=Please+login+first");
+        return;
+    }
+%>
 <%@ page import="business.customer.dto.CustomerDTO" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
@@ -95,7 +104,7 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-6 align-self-center">
-                <div class="caption header-text"><h6>Welcome to lugx</h6>
+                <div class="caption header-text"><h6>Billing Section</h6>
                     <div class="search-input">
                         <form action="BillServlet" method="post">
                             <input type="hidden" name="action" value="fetchCustomer">
