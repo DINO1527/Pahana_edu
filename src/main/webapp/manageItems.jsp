@@ -5,6 +5,16 @@
   Time: 20:58
   To change this template use File | Settings | File Templates.
 --%>
+<%
+    HttpSession session1 = request.getSession(false);
+    if (session1 == null || session1.getAttribute("userId") == null) {
+        if (session1 != null) {
+            session1.invalidate();
+        }
+        response.sendRedirect("login.jsp?error=Please+login+first");
+        return;
+    }
+%>
 <script>
     window.addEventListener("load", function () {
         const urlParams = new URLSearchParams(window.location.search);
@@ -17,6 +27,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="java.util.List" %>
 <%@ page import="business.book.dto.BookDTO" %>
+<%@ page import="java.nio.file.FileStore" %>
 <%
     List<BookDTO> books = (List<BookDTO>) request.getAttribute("books");
 %>
@@ -103,15 +114,19 @@
         <div class="row">
             <div class="col-lg-6 align-self-center">
                 <div class="caption header-text">
-                    <h6>Welcome to lugx</h6>
+                    <h6>Inventory Management</h6>
                     <div class="search-input">
                         <form method="get" action="bookInventory" class="search-bar">
                             <input type="text" name="search"
                                    placeholder="Search by ID or Name"
                                    value="<%= request.getParameter("search") != null ? request.getParameter("search") : "" %>">
                             <button type="submit">Search</button>
+                            <button  style="right: -200px;"  type="button" onclick="window.location.href='addBook.jsp'">
+                                Add New Book
+                            </button>
                         </form>
                     </div>
+
                 </div>
             </div>
         </div>

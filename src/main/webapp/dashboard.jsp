@@ -6,7 +6,20 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
+<%@ page import="javax.servlet.http.HttpSession" %>
+<%
+    HttpSession session1 = request.getSession(false);
+    if (session1 == null || session1.getAttribute("userId") == null) {
+        if (session1 != null) {
+            session1.invalidate();
+        }
+        response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+        response.setHeader("Pragma", "no-cache");
+        response.setDateHeader("Expires", 0);
+        response.sendRedirect("login.jsp?error=Please+login+first");
+        return;
+    }
+%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -62,7 +75,6 @@
                 <div class="caption header-text">
                     <h2>Welcome to<span style="color: #fc7e38; "> PAHANA <span style=" font-size: 10px;">edu</span></span></h2>
                     <h4>Bookshop Management System</h4>
-                    <p>Empowering Bookshops to Thrive in the Digital Age!</p>
                     </div>
                 </div>
             </div>

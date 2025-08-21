@@ -4,6 +4,7 @@
 <%
     BookDTO book = (BookDTO) request.getAttribute("book");
     boolean editMode = request.getAttribute("editMode") != null && (boolean) request.getAttribute("editMode");
+
 %>
 <html>
 <head>

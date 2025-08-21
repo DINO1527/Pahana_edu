@@ -40,7 +40,12 @@
     </div>
 </div>
 <!-- ***** Preloader End ***** -->
-
+<script type="text/javascript">
+    history.pushState(null, null, location.href);
+    window.onpopstate = function () {
+        history.go(1); // Prevent back
+    };
+</script>
 <div class="contact-page section bgm">
     <div class="container">
         <div class="row">
