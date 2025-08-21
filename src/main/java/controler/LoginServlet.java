@@ -27,13 +27,20 @@ public class LoginServlet extends HttpServlet {
         UserDTO loggedUser = userService.login(loginDTO);
 
         if (loggedUser != null) {
+            request.setAttribute("username", ""); // force empty
+            request.setAttribute("password", ""); // force empty
             HttpSession session = request.getSession();
             session.setAttribute("userId", loggedUser.getId());
             session.setAttribute("username", loggedUser.getUsername());
+            session.setAttribute("loginSuccess", true);
+
             response.sendRedirect("dashboard.jsp");
         } else {
             request.setAttribute("error", "Invalid username or password!");
+            request.setAttribute("username", ""); // force empty
+            request.setAttribute("password", ""); // force empty
             request.getRequestDispatcher("login.jsp").forward(request, response);
+
         }
     }
 }

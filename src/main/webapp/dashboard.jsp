@@ -7,7 +7,9 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="javax.servlet.http.HttpSession" %>
+
 <%
+
     HttpSession session1 = request.getSession(false);
     if (session1 == null || session1.getAttribute("userId") == null) {
         if (session1 != null) {
@@ -38,6 +40,7 @@
     <link rel="stylesheet" href="assets/css/owl.css">
     <link rel="stylesheet" href="assets/css/animate.css">
     <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css"/>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <!--
 
     -->
@@ -45,7 +48,25 @@
 
 <body>
 
+<%
+    HttpSession sess = request.getSession(false);
+    Boolean loginSuccess = (sess != null) ? (Boolean) sess.getAttribute("loginSuccess") : null;
+    if (loginSuccess != null && loginSuccess) {
+        sess.removeAttribute("loginSuccess"); // clear so it won’t repeat
+%>
 
+<script>
+    Swal.fire({
+        icon: 'success',
+        title: 'Login Successful',
+        text: 'Welcome <%= sess.getAttribute("username") %>!',
+        timer: 2000,
+        showConfirmButton: false
+    });
+</script>
+<%
+    }
+%>
 <!-- ***** Preloader Start ***** -->
 <div id="js-preloader" class="js-preloader">
     <div class="preloader-inner">
@@ -133,13 +154,7 @@
     </div>
 </div>
 
-<footer>
-    <div class="container">
-        <div class="col-lg-12">
-            <p>Copyright © 2048 LUGX Gaming Company. All rights reserved. &nbsp;&nbsp; <a rel="nofollow" href="https://templatemo.com" target="_blank">Design: TemplateMo</a></p>
-        </div>
-    </div>
-</footer>
+<jsp:include page="footer.jsp" />
 
 <!-- Scripts -->
 <!-- Bootstrap core JavaScript -->

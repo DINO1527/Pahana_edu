@@ -18,7 +18,8 @@
     <link rel="stylesheet" href="assets/css/owl.css">
     <link rel="stylesheet" href="assets/css/animate.css">
     <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css"/>
-    <!-- TemplateMo 589 lugx gaming https://templatemo.com/tm-589-lugx-gaming --> </head>
+
+</head>
 <body>
 <style>
     table {
@@ -124,12 +125,8 @@ th {
         </div>
     </div>
 </div>
-<footer>
-    <div class="container">
-        <div class="col-lg-12"><p>Copyright © 2048 LUGX Gaming Company. All rights reserved. &nbsp;&nbsp; <a
-                rel="nofollow" href="https://templatemo.com" target="_blank">Design: TemplateMo</a></p></div>
-    </div>
-</footer> <!-- Scripts --> <!-- Bootstrap core JavaScript -->
+<jsp:include page="footer.jsp" />
+ <!-- Scripts --> <!-- Bootstrap core JavaScript -->
 <script src="vendor/jquery/jquery.min.js"></script>
 <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
 <script src="assets/js/isotope.min.js"></script>

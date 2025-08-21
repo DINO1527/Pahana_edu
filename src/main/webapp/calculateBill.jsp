@@ -110,6 +110,9 @@
                             <input type="hidden" name="action" value="fetchCustomer">
                             <input type="text" name="search" placeholder="Phone or Account No">
                             <button role="button" type="submit">Search Now</button>
+                            <button  style="right: -250px;"  type="button" onclick="window.location.href='addCustomer.jsp'">
+                                Add New Customer
+                            </button>
                         </form>
                     </div>
                 </div>
@@ -184,7 +187,7 @@
     </div>
 </div>
 
-
+<jsp:include page="footer.jsp" />
 
 
 <script>
