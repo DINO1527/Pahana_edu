@@ -1,5 +1,6 @@
 package persistence.staff;
 
+import business.user.dto.StaffDTO;
 import business.user.model.User;
 import persistence.util.DBConnection;
 
@@ -25,5 +26,31 @@ public class UserDAO {
             e.printStackTrace();
         }
         return user;
+    }
+    public StaffDTO getUserById(int userId) throws Exception {
+        String sql = "SELECT user_id, password FROM users WHERE user_id=?";
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setInt(1, userId);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                return new StaffDTO(
+                        rs.getInt("user_id"),
+                        rs.getString("password")
+                );
+            }
+        }
+        return null;
+    }
+
+    // Update password
+    public boolean updatePassword(int userId, String hashedPassword) throws Exception {
+        String sql = "UPDATE users SET password=? WHERE user_id=?";
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1, hashedPassword);
+            ps.setInt(2, userId);
+            return ps.executeUpdate() > 0;
+        }
     }
 }

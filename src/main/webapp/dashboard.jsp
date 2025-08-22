@@ -22,13 +22,18 @@
         return;
     }
 %>
+<%
+    String alertType = (String) session.getAttribute("alertType");
+    String alertMsg = (String) session.getAttribute("alertMsg");
+    if (alertType != null && alertMsg != null) {
+%>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
-    <title>Lugx Gaming Shop HTML5 Template</title>
+    <title>Pahana edu dashboard</title>
 
     <!-- Bootstrap core CSS -->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -67,6 +72,19 @@
 <%
     }
 %>
+<script>
+    Swal.fire({
+        icon: '<%= alertType %>',
+        title: '<%= alertType.equals("success") ? "Success" : "Error" %>',
+        text: '<%= alertMsg %>',
+        confirmButtonColor: '#ff6600'
+    });
+</script>
+<%
+        session.removeAttribute("alertType");
+        session.removeAttribute("alertMsg");
+    }
+%>
 <!-- ***** Preloader Start ***** -->
 <div id="js-preloader" class="js-preloader">
     <div class="preloader-inner">
@@ -102,12 +120,14 @@
         </div>
     </div>
 </div>
-
+<style>.dd{
+    max-height: max-content;
+}</style>
 <div class="features">
     <div class="container " >
         <div class="row">
 
-            <div class="col-lg-3 col-md-6">
+            <div class="col-lg-3 col-md-6  dd">
                 <a href="calculateBill.jsp">
                     <div class="item cap" >
                         <div class="image">
@@ -140,7 +160,7 @@
                 </a>
             </div>
             <div class="col-lg-3 col-md-6">
-                <a href="help.jsp">
+                <a href="Help.jsp">
                     <div class="item cap">
                         <div class="image">
                             <img src="assets/images/help.png" alt="" style="max-width: 44px;">

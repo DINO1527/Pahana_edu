@@ -31,10 +31,14 @@ public class CustomerService {
         return dao.addCustomer(customer);
     }
     public boolean deleteCustomer(int id) {
+
         return dao.deleteCustomer(id);
     }
 
     public boolean updateCustomer(CustomerDTO dto) {
+        if (dao.isPhoneNumberExistsforupdate(dto.getPhone(),dto.getCustomerId())) {
+            return false;
+        }
         Customer customer = CustomerMapper.toEntity(dto);
         return dao.updateCustomer(customer);
     }

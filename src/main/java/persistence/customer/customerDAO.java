@@ -63,6 +63,22 @@ public class customerDAO {
                 return false;
             }
         }
+    public boolean isPhoneNumberExistsforupdate(String phone, int userId) {
+        String sql = "SELECT phone_number FROM customers WHERE phone_number = ? AND customer_id <> ?";
+        try (Connection con = DBConnection.getConnection();
+             PreparedStatement ps = con.prepareStatement(sql)) {
+
+            ps.setString(1, phone);
+            ps.setInt(2, userId);
+
+            ResultSet rs = ps.executeQuery();
+            return rs.next(); // returns true if a different user already has this phone number
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
 
 
         // Get all customers
@@ -133,7 +149,7 @@ public class customerDAO {
 
         // Delete customer
         public boolean deleteCustomer(int id) {
-            String sql = "DELETE FROM customers WHERE customer_id=?";
+            String sql = "UPDATE customers SET status='inactive' WHERE customer_id=?";
             try (Connection con = DBConnection.getConnection();
                  PreparedStatement ps = con.prepareStatement(sql)) {
                 ps.setInt(1, id);
@@ -170,8 +186,7 @@ public class customerDAO {
 
         // bill jsp functions
         public Customer findCustomer(String input) {
-            String sql = "SELECT * FROM customers WHERE phone_number=? OR account_number=?";
-            try (Connection con = DBConnection.getConnection();
+            String sql = "SELECT * FROM customers WHERE status='active' AND (phone_number=? OR account_number=?)";            try (Connection con = DBConnection.getConnection();
                  PreparedStatement ps = con.prepareStatement(sql)) {
                 ps.setString(1, input);
                 ps.setString(2, input);
@@ -191,7 +206,7 @@ public class customerDAO {
         }
     public List<Customer> findAll() {
         String sql = "SELECT customer_id, account_number, name, address, phone_number, email " +
-                "FROM customers ORDER BY customer_id";
+                "FROM customers where status='active' ORDER BY customer_id";
         List<Customer> list = new ArrayList<>();
 
         try (Connection con = DBConnection.getConnection();
@@ -220,9 +235,8 @@ public class customerDAO {
     public List<Customer> findByKeyword(String keyword) {
         String sql = "SELECT customer_id, account_number, name, address, phone_number, email " +
                 "FROM customers " +
-                "WHERE customer_id LIKE ? OR account_number LIKE ? OR name LIKE ? " +
+                "WHERE status='active' AND (customer_id LIKE ? OR account_number LIKE ? OR name LIKE ?) " +
                 "ORDER BY customer_id";
-
         List<Customer> list = new ArrayList<>();
 
         try (Connection con = DBConnection.getConnection();

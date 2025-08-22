@@ -59,6 +59,41 @@ th {
     </div>
 </div> <!-- ***** Preloader End ***** --> <!-- ***** Header Area Start ***** -->
 <jsp:include page="navigation.jsp" />
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
+<script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const status = urlParams.get('status');
+
+    if (status === 'deleted') {
+        Swal.fire({
+            title: 'Deleted!',
+            text: 'Customer has been successfully removed.',
+            icon: 'success',
+            confirmButtonText: 'ok'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = 'manageCustomer'; // Change this to your desired page
+            }
+        });
+    } else if (status === 'error') {
+        Swal.fire({
+            title: 'Error!',
+            text: 'Failed to delete customer.',
+            icon: 'error',
+            confirmButtonText: 'Try Again'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = 'manageCustomer'; // Change this to your desired page
+            }})
+    }
+</script>
+
+
+
+
 <!-- ***** Header Area End ***** -->
 <div class="main-banner" with="100%" height="50%">
     <div class="container">

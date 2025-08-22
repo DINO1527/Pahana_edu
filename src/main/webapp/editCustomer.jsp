@@ -15,6 +15,34 @@
         return;
     }
 %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
+<head>
+    <title>Edit Customer</title>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body>
+
+<%
+    String status = request.getParameter("status");
+    if (status != null) {
+%>
+<script>
+    Swal.fire({
+        icon: '<%= status.equals("success") ? "success" : "error" %>',
+        title: '<%= status.equals("success") ? "Updated!" : "Error!" %>',
+        text: '<%= status.equals("success") ? "Customer details updated successfully." : "Failed to update customer." %>',
+        confirmButtonText: 'OK'
+    });
+</script>
+<%
+    }
+%>
+
+<!-- Your edit form goes here -->
+</body>
+</html>
+
 <html>
 <head>
     <title>Customer Details</title>
@@ -41,21 +69,38 @@
 
 
 
+<style>.close-btn {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    border-radius: 50%;
+    background-color: #f44336; /* red background */
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
 
+.close-btn:hover {
+    background-color: #d32f2f; /* darker red on hover */
+}</style>
 
-<header class="header-area header-sticky" style="background-color: aqua;top: 0;">
+<header class="header-area header-sticky" style="background-color: #fc7e38;top: 0;">
     <div class="container" >
         <div class="row">
             <div class="col-12">
                 <nav class="main-nav">
                     <!-- ***** Logo Start ***** -->
-                    <a href="index.html" class="logo">
-                        <img src="assets/images/logo.jpg" alt="" style="width: 158px;">
+                    <a href="dashboard.jsp" class="logo">
+                        <img src="assets/images/logo.png" alt="" style="width: 80px;">
                     </a>
                     <!-- ***** Logo End ***** -->
                     <!-- ***** Menu Start ***** -->
                     <ul class="nav">
-                        <span class="close-btn" onclick="closePopup()">&times;</span>
+                        <span class="close-btn" onclick="closePopup()">&times</span>
                     </ul>
                     <a class='menu-trigger'>
                         <span>Menu</span>
@@ -90,22 +135,22 @@
                         <label>Customer Name:</label>
                         <div class="input-container">
                             <input type="text" id="Customer_Name" name="Customer_Name" value="<%=c.getName()%>" required readonly>
-                            <i class="fas fa-edit edit-icon" onclick="enableEdit('Customer_Name')"></i>
+                            <i class="fas fa-edit edit-icon" style="color:#fc7e38" onclick="enableEdit('Customer_Name')"></i>
                         </div>
                         <label>Phone Number</label>
                         <div class="input-container">
                             <input type="text" id="Phone_no" name="Phone_no" value="<%=c.getPhone()%>" required pattern="\d{10}" readonly>
-                            <i class="fas fa-edit edit-icon" onclick="enableEdit('Phone_no')"></i>
+                            <i class="fas fa-edit edit-icon" style="color:#fc7e38" onclick="enableEdit('Phone_no')"></i>
                         </div>
                         <label>Email</label>
                         <div class="input-container">
                             <input type="email" id="email" name="email" value="<%=c.getEmail()%>" required  readonly>
-                            <i class="fas fa-edit edit-icon" onclick="enableEdit('email')"></i>
+                            <i class="fas fa-edit edit-icon" style="color:#fc7e38" onclick="enableEdit('email')"></i>
                         </div>
                         <label>Address</label>
                         <div class="input-container">
                             <input type="text" id="address" name="address" value="<%=c.getAddress()%>" required readonly>
-                            <i class="fas fa-edit edit-icon" onclick="enableEdit('address')"></i>
+                            <i class="fas fa-edit edit-icon" style="color:#fc7e38" onclick="enableEdit('address')"></i>
                         </div>
 
 
@@ -113,13 +158,13 @@
                         <div class="button-container">
                             <button type="submit" class="update-btn">Update</button>
 
-                            <form method="post" action="DeleteCustomerServlet">
-                                <input type="hidden" name="customer_id" value="<%=c.getCustomerId()%>"/>
-                                <button type="submit" class="delete-btn">Delete</button>
-                            </form>
+
                         </div>
                     </form>
-
+                    <form method="post" action="DeleteCustomerServlet">
+                        <input type="hidden" name="customer_id" value="<%=c.getCustomerId()%>"/>
+                        <button type="submit" class="delete-btn" style=" margin-left: 330px; margin-top: -58px;">Delete</button>
+                    </form>
 
                 </div>
             </div>
@@ -130,7 +175,7 @@
                         <!-- Purchase History Table -->
                         <div class="col-12">
                             <h4 style="margin-bottom: 15px;">Purchase History</h4>
-                            <div class="table-container">
+                            <div class="table-container" style="max-height: 450px; overflow-y: auto; overflow-x: auto;">
                                 <table class="table table-bordered table-striped">
                                     <thead class="table-dark">
                                     <tr>

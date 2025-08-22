@@ -4,14 +4,21 @@
     response.setHeader("Pragma","no-cache"); // HTTP 1.0
     response.setDateHeader ("Expires", 0); // Proxies
 %>
+<script type="text/javascript">
+    history.pushState(null, null, location.href);
+    window.addEventListener('popstate', function () {
+        history.pushState(null, null, location.href);
+    });
+
+</script>
 <html>
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-
-    <title>Lugx Gaming Template - Contact Page</title>
+<
+    <title>login page</title>
 
     <!-- Bootstrap core CSS -->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -48,13 +55,7 @@
 </script>
 <% } %>
 
-<script type="text/javascript">
-    history.pushState(null, null, location.href);
-    window.onpopstate = function () {
-        history.go(1); // Prevent back
-        window.onload();
-    };
-</script>
+
 <!-- ***** Preloader Start ***** -->
 <div id="js-preloader" class="js-preloader">
     <div class="preloader-inner">

@@ -1,5 +1,6 @@
 package business.user.service;
 
+import business.user.dto.StaffDTO;
 import business.user.dto.UserDTO;
 import business.user.mapper.UserMapper;
 import business.user.model.User;
@@ -38,5 +39,23 @@ public class UserService {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+    }
+    private final UserDAO dao = new UserDAO();
+    public boolean updatePassword(int userId, String currentPassword, String newPassword) throws Exception {
+        StaffDTO user = dao.getUserById(userId);
+        if (user == null) return false;
+
+        String currentHash = hashPassword(currentPassword);
+        if (!currentHash.equals(user.getPassword())) {
+            return false; // old password mismatch
+        }
+
+        // check password requirements
+        if (!newPassword.matches("^(?=.*[0-9])(?=.*[!@#$%^&*]).{5,}$")) {
+            return false; // invalid new password
+        }
+
+        String newHash = hashPassword(newPassword);
+        return dao.updatePassword(userId, newHash);
     }
 }

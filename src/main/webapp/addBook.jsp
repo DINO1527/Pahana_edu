@@ -78,14 +78,14 @@
 %>
 
 
-<header class="header-area header-sticky" style="background-color: aqua;top: 0;">
+<header class="header-area header-sticky" style="background-color: #fc7e38;top: 0;">
     <div class="container">
         <div class="row">
             <div class="col-12">
                 <nav class="main-nav">
                     <!-- ***** Logo Start ***** -->
                     <a href="index.html" class="logo">
-                        <img src="assets/images/logo.png" alt="" style="width: 158px;">
+                        <img src="assets/images/logo.png" alt="" style="width: 80px;">
                     </a>
                     <!-- ***** Logo End ***** -->
                     <!-- ***** Menu Start ***** -->
@@ -112,10 +112,9 @@
                 <div class="left-text">
                     <div class="section-heading">
                         <h6>Welcome to Pahana Edu Book Shop</h6>
-                        <h2>Register new customer</h2>
+                        <h2>Book inventory</h2>
                     </div>
-                    <p>Pahana Edu Book Shop is your trusted source for educational books and materials. Use the form
-                        below to register a new customer in our system.</p>
+
                 </div>
             </div>
             <div class="col-lg-6">

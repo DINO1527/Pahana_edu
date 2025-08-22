@@ -6,6 +6,20 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%
+
+    HttpSession session1 = request.getSession(false);
+    if (session1 == null || session1.getAttribute("userId") == null) {
+        if (session1 != null) {
+            session1.invalidate();
+        }
+        response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+        response.setHeader("Pragma", "no-cache");
+        response.setDateHeader("Expires", 0);
+        response.sendRedirect("login.jsp?error=Please+login+first");
+        return;
+    }
+%>
 <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
 
