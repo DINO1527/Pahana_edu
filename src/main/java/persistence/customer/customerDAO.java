@@ -149,7 +149,7 @@ public class customerDAO {
 
         // Delete customer
         public boolean deleteCustomer(int id) {
-            String sql = "UPDATE customers set status='inactive' WHERE customer_id=?";
+            String sql = "UPDATE customers SET status='inactive' WHERE customer_id=?";
             try (Connection con = DBConnection.getConnection();
                  PreparedStatement ps = con.prepareStatement(sql)) {
                 ps.setInt(1, id);

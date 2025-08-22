@@ -158,13 +158,13 @@
                         <div class="button-container">
                             <button type="submit" class="update-btn">Update</button>
 
-                            <form method="post" action="DeleteCustomerServlet">
-                                <input type="hidden" name="customer_id" value="<%=c.getCustomerId()%>"/>
-                                <button type="submit" class="delete-btn">Delete</button>
-                            </form>
+
                         </div>
                     </form>
-
+                    <form method="post" action="DeleteCustomerServlet">
+                        <input type="hidden" name="customer_id" value="<%=c.getCustomerId()%>"/>
+                        <button type="submit" class="delete-btn" style=" margin-left: 330px; margin-top: -58px;">Delete</button>
+                    </form>
 
                 </div>
             </div>

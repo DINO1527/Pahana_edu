@@ -4,6 +4,13 @@
     response.setHeader("Pragma","no-cache"); // HTTP 1.0
     response.setDateHeader ("Expires", 0); // Proxies
 %>
+<script type="text/javascript">
+    history.pushState(null, null, location.href);
+    window.addEventListener('popstate', function () {
+        history.pushState(null, null, location.href);
+    });
+
+</script>
 <html>
 
 <head>
@@ -48,13 +55,7 @@
 </script>
 <% } %>
 
-<script type="text/javascript">
-    history.pushState(null, null, location.href);
-    window.onpopstate = function () {
-        history.go(1); // Prevent back
-        window.onload();
-    };
-</script>
+
 <!-- ***** Preloader Start ***** -->
 <div id="js-preloader" class="js-preloader">
     <div class="preloader-inner">

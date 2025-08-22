@@ -31,6 +31,7 @@ public class CustomerService {
         return dao.addCustomer(customer);
     }
     public boolean deleteCustomer(int id) {
+
         return dao.deleteCustomer(id);
     }
 

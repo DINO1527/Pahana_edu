@@ -15,8 +15,8 @@ public class DeleteCustomerServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        int id = Integer.parseInt(request.getParameter("customerId"));
+        int id = Integer.parseInt(request.getParameter("customer_id"));
         boolean result = service.deleteCustomer(id);
-        response.sendRedirect("viewCustomers.jsp?status=" + (result ? "deleted" : "error"));
+        response.sendRedirect("manageCustomer.jsp?status=" + (result ? "deleted" : "error"));
     }
 }

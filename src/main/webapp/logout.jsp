@@ -12,11 +12,17 @@
 %>
 <script type="text/javascript">
   history.pushState(null, null, location.href);
-  window.onpopstate = function () {
-    history.go(1); // Prevent back
+  window.addEventListener('popstate', function () {
+    history.pushState(null, null, location.href);
+  });
+  window.onbeforeunload = function () {
+    return "Are you sure you want to leave this page?";
   };
+
+
 </script>
 
+
 <%
-  response.sendRedirect("dashboard.jsp");
+  response.sendRedirect("login.jsp");
 %>
