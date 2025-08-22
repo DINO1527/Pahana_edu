@@ -35,6 +35,9 @@ public class CustomerService {
     }
 
     public boolean updateCustomer(CustomerDTO dto) {
+        if (dao.isPhoneNumberExistsforupdate(dto.getPhone(),dto.getCustomerId())) {
+            return false;
+        }
         Customer customer = CustomerMapper.toEntity(dto);
         return dao.updateCustomer(customer);
     }

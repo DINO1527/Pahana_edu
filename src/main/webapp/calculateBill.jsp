@@ -202,7 +202,7 @@
             <td><input type="number"  name="bookId"   class="bookSelect" required> </td>
             <td><input type="text"    name="bookName" class="bookName"   readonly></td>
             <td><input type="number"  name="price"    class="price"      readonly></td>
-            <td><input type="number"  name="qty"      class="qty"        min="1" value="1"></td>
+            <td><input type="number"  name="qty"      class="qty"        required min="1" value="1"></td>
             <td><input type="number"  name="total"    class="total"      readonly></td>
             <td><button type="button" class="removeRow">❌</button></td>  `;
             tableBody.appendChild(row);

@@ -33,31 +33,31 @@
   </style>
 </head>
 <body>
-<header class="header-area header-sticky">
-  <div class="container" style="color: #fc7e38;">
+<header class="header-area header-sticky" style="background-color: rgba(252,126,56,0.63);top: 0;position: fixed">
+  <div class="container" >
     <div class="row">
       <div class="col-12">
         <nav class="main-nav">
           <!-- ***** Logo Start ***** -->
-          <a href="index.jsp" class="logo">
+          <a href="index.html" class="logo">
             <img src="assets/images/logo.png" alt="" style="width: 80px;">
           </a>
           <a class="navbar-brand" href="#">pahana edu - Staff Help</a>
           <!-- ***** Logo End ***** -->
-
           <!-- ***** Menu Start ***** -->
           <ul class="nav">
-
-            <!-- Context-sensitive Help -->
-            <li class="nav-item"><a class="nav-link" href="dashboard.jsp">Back to Dashboard</a></li>
+            <li><a href="javascript:history.back()">❌</a></li>
           </ul>
-
+          <a class='menu-trigger'>
+            <span>Menu</span>
+          </a>
           <!-- ***** Menu End ***** -->
         </nav>
       </div>
     </div>
   </div>
 </header>
+
 
 
 

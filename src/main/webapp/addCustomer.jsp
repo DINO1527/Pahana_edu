@@ -6,6 +6,22 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
+<%
+
+    HttpSession session1 = request.getSession(false);
+    if (session1 == null || session1.getAttribute("userId") == null) {
+        if (session1 != null) {
+            session1.invalidate();
+        }
+        response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+        response.setHeader("Pragma", "no-cache");
+        response.setDateHeader("Expires", 0);
+        response.sendRedirect("login.jsp?error=Please+login+first");
+        return;
+    }
+%>
+
 <%
     String status = request.getParameter("status");
     String message = request.getParameter("message");
@@ -87,7 +103,7 @@
                     <nav class="main-nav">
                         <!-- ***** Logo Start ***** -->
                         <a href="index.html" class="logo">
-                            <img src="assets/images/logo.png" alt="" style="width: 158px;">
+                            <img src="assets/images/logo.png" alt="" style="width: 80px;">
                         </a>
                         <!-- ***** Logo End ***** -->
                         <!-- ***** Menu Start ***** -->
